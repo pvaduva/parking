@@ -28,6 +28,9 @@ namespace parking.Repositories
         {
             lock(_lock) 
             {
+                if (_parkedCars.Count >= 10) {
+                    throw new ParkingLotFullException("The parking lot is full");
+                }
                 if (_parkedCars.ContainsKey(licensePlateNumber)) {
                     throw new LicencePlateException("Car with the same license plate already exists");
                 }

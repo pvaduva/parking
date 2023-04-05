@@ -31,8 +31,12 @@ namespace parking.Controllers
             {
                 await  _parkingService.ParkCarAsync(licensePlateNumber);
                 return Ok();
-             }  
-             catch (LicencePlateException ex)
+            }  
+            catch (ParkingLotFullException ex) 
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (LicencePlateException ex)
             {
                 return BadRequest(ex.Message);
             }
